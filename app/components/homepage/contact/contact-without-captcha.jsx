@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import { TbMailForward } from "react-icons/tb";
 import { toast } from 'react-toastify';
+import emailjs from '@emailjs/browser';
+
 
 function ContactWithoutCaptcha() {
   const [error, setError] = useState({ email: false, required: false });
@@ -14,11 +16,11 @@ function ContactWithoutCaptcha() {
     message: '',
   });
 
-  const checkRequired = () => {
-    if (userInput.email && userInput.message && userInput.name) {
-      setError({ ...error, required: false });
-    }
-  };
+  // const checkRequired = () => {
+  //   if (userInput.email && userInput.message && userInput.name) {
+  //     setError({ ...error, required: false });
+  //   }
+  // };
 
   const handleSendMail = async (e) => {
     e.preventDefault();
@@ -37,9 +39,10 @@ function ContactWithoutCaptcha() {
 
     try {
       const res = await emailjs.send(serviceID, templateID, userInput, options);
-      const teleRes = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/contact`, userInput);
-
-      if (res.status === 200 || teleRes.status === 200) {
+      // const teleRes = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/contact`, userInput);
+      console.log("Your EMAILJS response is", res);
+      
+      if (res.status === 200) {
         toast.success('Message sent successfully!');
         setUserInput({
           name: '',
@@ -70,7 +73,7 @@ function ContactWithoutCaptcha() {
               maxLength="100"
               required={true}
               onChange={(e) => setUserInput({ ...userInput, name: e.target.value })}
-              onBlur={checkRequired}
+              // onBlur={checkRequired}
               value={userInput.name}
             />
           </div>
@@ -84,10 +87,10 @@ function ContactWithoutCaptcha() {
               required={true}
               value={userInput.email}
               onChange={(e) => setUserInput({ ...userInput, email: e.target.value })}
-              onBlur={() => {
-                checkRequired();
-                setError({ ...error, email: !isValidEmail(userInput.email) });
-              }}
+              // onBlur={() => {
+              //   checkRequired();
+              //   setError({ ...error, email: !isValidEmail(userInput.email) });
+              // }}
             />
             {error.email &&
               <p className="text-sm text-red-400">Please provide a valid email!</p>
@@ -102,7 +105,7 @@ function ContactWithoutCaptcha() {
               name="message"
               required={true}
               onChange={(e) => setUserInput({ ...userInput, message: e.target.value })}
-              onBlur={checkRequired}
+              // onBlur={checkRequired}
               rows="4"
               value={userInput.message}
             />
