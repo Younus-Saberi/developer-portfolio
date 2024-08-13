@@ -6,7 +6,7 @@
 
 # Demo :movie_camera:
 
-![](./public/image/screen.png)
+<!-- ![](./public/image/screen.png) -->
 
 ## View live preview [here](https://younussaberi.vercel.app/).
 
@@ -141,5 +141,4 @@ export const personalData = {
 |   react-toastify   |
 |        sass        |
 |    tailwindcss     |
-
 ---
