@@ -141,6 +141,5 @@ export const personalData = {
 |   react-toastify   |
 |        sass        |
 |    tailwindcss     |
-<!-- |    framer-motion   | -->
 
 ---
