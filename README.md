@@ -31,7 +31,7 @@
 - SKILLS
 - PROJECTS
 - EDUCATION
-<!-- - BLOG -->
+- BLOG
 - CONTACTS
 
 ---
